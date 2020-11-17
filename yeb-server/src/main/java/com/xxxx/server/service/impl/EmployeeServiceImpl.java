@@ -37,10 +37,13 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee> i
 
 	@Override
 	public Map<String, Object>  queryEmpbyName(EmployeeVo employeeVo) {
-		//查询emp返回emp数组
+		//开启分页
 		PageHelper.startPage(employeeVo.getCurrentPage(),employeeVo.getSize());
+		//查询emp返回list集合
 		List<Employee>list = employeeMapper.queryEmpbyName(employeeVo);
+		//使用 pageHelper 帮我们处理了总记录数
 		PageInfo<Employee> pageInfo = new PageInfo<>(list);
+
 		Map<String, Object> map = new HashMap<>();
 		map.put("code",200);
 		map.put("msg","success");
