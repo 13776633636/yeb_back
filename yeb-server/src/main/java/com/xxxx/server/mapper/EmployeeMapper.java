@@ -2,6 +2,9 @@ package com.xxxx.server.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.xxxx.server.pojo.Employee;
+import com.xxxx.server.pojo.EmployeeVo;
+
+import java.util.List;
 
 /**
  * <p>
@@ -12,4 +15,5 @@ import com.xxxx.server.pojo.Employee;
  */
 public interface EmployeeMapper extends BaseMapper<Employee> {
 
+    List<Employee> queryEmpbyName(EmployeeVo employeeVo);
 }

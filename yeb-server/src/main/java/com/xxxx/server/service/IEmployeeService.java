@@ -2,6 +2,9 @@ package com.xxxx.server.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.xxxx.server.pojo.Employee;
+import com.xxxx.server.pojo.EmployeeVo;
+
+import java.util.Map;
 
 /**
  * <p>
@@ -13,4 +16,5 @@ import com.xxxx.server.pojo.Employee;
 public interface IEmployeeService extends IService<Employee> {
 
 
+    Map<String, Object> queryEmpbyName(EmployeeVo employeeVo);
 }
