@@ -40,6 +40,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
 		//如果为空，去数据库获取
 		if (CollectionUtils.isEmpty(menus)){
 			menus = menuMapper.getMenusByAdminId(adminId);
+			//System.out.println(menus);
 			//将数据设置到Redis中
 			valueOperations.set("menu_"+adminId,menus);
 		}
