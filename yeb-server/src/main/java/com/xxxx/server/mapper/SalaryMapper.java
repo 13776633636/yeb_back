@@ -1,7 +1,10 @@
 package com.xxxx.server.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.xxxx.server.pojo.MySalaryInfo;
 import com.xxxx.server.pojo.Salary;
+
+import java.util.List;
 
 /**
  * <p>
@@ -12,4 +15,5 @@ import com.xxxx.server.pojo.Salary;
  */
 public interface SalaryMapper extends BaseMapper<Salary> {
 
+    List<MySalaryInfo> listAll();
 }

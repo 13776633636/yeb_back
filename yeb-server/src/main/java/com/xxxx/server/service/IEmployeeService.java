@@ -17,4 +17,8 @@ public interface IEmployeeService extends IService<Employee> {
 
 
     Map<String, Object> queryEmpbyName(EmployeeVo employeeVo);
+
+    boolean updateSidById(EmployeeVo vo);
+
+    Map<String, Object>  maxWorkID();
 }

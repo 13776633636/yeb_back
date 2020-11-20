@@ -50,5 +50,63 @@ public class EmployeeEc implements Serializable {
     @ApiModelProperty(value = "备注")
     private String remark;
 
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getEid() {
+        return eid;
+    }
+
+    public void setEid(Integer eid) {
+        this.eid = eid;
+    }
+
+    public LocalDate getEcDate() {
+        return ecDate;
+    }
+
+    public void setEcDate(LocalDate ecDate) {
+        this.ecDate = ecDate;
+    }
+
+    public String getEcReason() {
+        return ecReason;
+    }
+
+    public void setEcReason(String ecReason) {
+        this.ecReason = ecReason;
+    }
+
+    public Integer getEcPoint() {
+        return ecPoint;
+    }
+
+    public void setEcPoint(Integer ecPoint) {
+        this.ecPoint = ecPoint;
+    }
+
+    public Integer getEcType() {
+        return ecType;
+    }
+
+    public void setEcType(Integer ecType) {
+        this.ecType = ecType;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
 }

@@ -34,6 +34,13 @@
 			<version>2.3.0</version>
 		</dependency>
 
+		<dependency>
+			<groupId>com.github.tobato</groupId>
+			<artifactId>fastdfs-client</artifactId>
+			<version>1.26.7</version>
+		</dependency>
+
+
 		<!--lombok 依赖-->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -122,19 +129,35 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-websocket</artifactId>
 		</dependency>
+		<!--POI操作的依赖-->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-scratchpad</artifactId>
+			<version>3.11-beta2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>3.11-beta2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml-schemas</artifactId>
+			<version>3.11-beta2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-excelant</artifactId>
+			<version>3.11-beta2</version>
+		</dependency>
+
+
 		<!--FastDFS依赖-->
 		<!--<dependency>
 			<groupId>cn.aghost</groupId>
 			<artifactId>fastdfs-client-java</artifactId>
 			<version>1.29.0</version>
 		</dependency>-->
-		<!---->
-		<!--<dependency>
-			<groupId>org.csource</groupId>
-			<artifactId>fastdfs-client-java</artifactId>
-			<version>1.29-SNAPSHOT</version>
-		</dependency>-->
-
 	</dependencies>
 
 	<build>

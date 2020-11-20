@@ -2,4 +2,39 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xxxx.server.mapper.DepartmentMapper">
 
+    <select id="listAll_1" resultMap="selectListMap">
+        select t1.id as pId,
+                t1.name as pMenuName,
+                t1.parentId as pPid,
+                t2.id as sId,
+                t2.name as sMenuName,
+                t2.parentId as sPid
+        from t_department t1
+        left join t_department t2 on t1.id = t2.parentId
+
+        where t1.parentId = -1
+    </select>
+
+
+
+    <resultMap id="selectListMap" type="Department">
+        <id property="id" column="pId"/>
+
+        <result property="name" column="pMenuName"/>
+        <result property="parentId" column="pPid"/>
+
+        <collection property="children" ofType="Department" javaType="List">
+            <id property="id" column="sId"/>
+            <result property="name" column="sMenuName"/>
+            <result property="parentId" column="sPid"/>
+        </collection>
+    </resultMap>
+
+    <select id="listAll" resultType="Department">
+        select *
+        from t_department
+    </select>
+
+
+
 </mapper>

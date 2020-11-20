@@ -22,4 +22,6 @@ public interface AdminMapper extends BaseMapper<Admin> {
 	 * @return
 	 */
 	List<Admin> getAllAdmins(@Param("id") Integer id, @Param("keywords") String keywords);
+
+    List<Admin> queryBYName(String keywords);
 }

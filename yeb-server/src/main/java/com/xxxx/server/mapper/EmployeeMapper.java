@@ -16,4 +16,8 @@ import java.util.List;
 public interface EmployeeMapper extends BaseMapper<Employee> {
 
     List<Employee> queryEmpbyName(EmployeeVo employeeVo);
+
+    Integer updateSidById(EmployeeVo vo);
+
+    String maxWorkID();
 }

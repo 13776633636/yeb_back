@@ -3,3 +3,11 @@
                                                             ▂▄▅█████████▅▄▃▂
                                                             I███████████████████].
                                                             ◥⊙▲⊙▲⊙▲⊙▲⊙▲⊙▲⊙◤...
+
+fdfs:
+  so-timeout: 1501 #socket连接超时时长
+  connect-timeout: 601 #连接tracker服务器超时时长
+  thumb-image:  #缩略图的宽高，可选
+    width: 60
+    height: 60
+  tracker-list: ip地址:22122  #地址，支持多个（集群）

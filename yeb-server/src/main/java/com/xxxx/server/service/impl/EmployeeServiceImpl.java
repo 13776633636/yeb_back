@@ -28,44 +28,53 @@ import java.util.Map;
 @SuppressWarnings("all")
 public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee> implements IEmployeeService {
 
-	@Autowired
-	private EmployeeMapper employeeMapper;//注入EmployeeMapper
+    @Autowired
+    private EmployeeMapper employeeMapper;//注入EmployeeMapper
 
-	@Autowired
-	private RabbitTemplate rabbitTemplate;//注入RabbitTemplate用来实现消息队列
-	@Autowired
-	private MailLogMapper mailLogMapper;//注入MailLogMapper用来实现邮件功能
+    @Autowired
+    private RabbitTemplate rabbitTemplate;//注入RabbitTemplate用来实现消息队列
+    @Autowired
+    private MailLogMapper mailLogMapper;//注入MailLogMapper用来实现邮件功能
     @Autowired
     private RedisTemplate redisTemplate;
 
-	@Override
-	public Map<String, Object>  queryEmpbyName(EmployeeVo employeeVo) {
+    @Override
+    public Map<String, Object> queryEmpbyName(EmployeeVo employeeVo) {
+
+        if(employeeVo.getName()!=null && !employeeVo.getName().equals("")){
+            employeeVo.setCurrentPage(1);
+            employeeVo.setSize(10);
+        }
+
         Map<String, Object> map = new HashMap<>();//最终返回的hash
-        //HashOperations hash = redisTemplate.opsForHash();
-        //Map employees = hash.entries("Employees");//获取所有的hash
 
 
         //开启分页
-        PageHelper.startPage(employeeVo.getCurrentPage(),employeeVo.getSize());
-        List<Employee> list= employeeMapper.queryEmpbyName(employeeVo);
-		PageInfo<Employee> pageInfo = new PageInfo<>(list);
-		pageInfo = new PageInfo<>(list);
-		map.put("code",200);
-		map.put("msg","success");
-		map.put("total", pageInfo.getTotal());
-		map.put("data",list);
+        PageHelper.startPage(employeeVo.getCurrentPage(), employeeVo.getSize());
+        List<Employee> list = employeeMapper.queryEmpbyName(employeeVo);
+        PageInfo<Employee> pageInfo = new PageInfo<>(list);
+       // pageInfo = new PageInfo<>(list);
+        map.put("code", 200);
+        map.put("message", "11111111111");
+        map.put("total", pageInfo.getTotal());
+        map.put("data", list);
 
-        /*if(employees.size() == 0){//缓存中没有，去数据库查询，并设置缓存
+		/*
+		PageInfo<Employee> pageInfo=null;
+		PageHelper.startPage(employeeVo.getCurrentPage(), employeeVo.getSize());
+        HashOperations hash = redisTemplate.opsForHash();
+        Map employees = hash.entries("Employees_"+employeeVo.getCurrentPage());//获取所有的hash
+        if(employees.size() == 0){//缓存中没有，去数据库查询，并设置缓存
             //查询emp返回list集合,并设置到redis缓存中
            List<Employee> list= employeeMapper.queryEmpbyName(employeeVo);
             System.out.println(list.size());
             for (Employee e:list) {
-                hash.put("Employees",e.getName(),e);//便利加入到redis中
+                hash.put("Employees_"+employeeVo.getCurrentPage(),e.getName(),e);//便利加入到redis中
             }
             pageInfo = new PageInfo<>(list);
             map.put("code",200);
             map.put("msg","success");
-            map.put("count", pageInfo.getTotal());
+            map.put("total", pageInfo.getTotal());
             map.put("data",list);
         }else{//缓存中有
             String name = employeeVo.getName();//前段传的name
@@ -75,18 +84,46 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee> i
                 pageInfo = new PageInfo<>(new ArrayList<>(employees1));
                 map.put("code",200);
                 map.put("msg","success");
-                map.put("count", pageInfo.getTotal());
+                map.put("total", pageInfo.getTotal());
                 map.put("data",employees1);
             }else{
-                Object o = ((HashMap) employees).get("name");//获取hash中的某个key
+				List<Employee> list = employeeMapper.queryEmpbyName(employeeVo);
                 map.put("code",200);
                 map.put("msg","success");
-                map.put("count", 1);
-                map.put("data",o);
+                map.put("total", 1);
+                map.put("data",list);
             }
 
         }*/
         return map;
 
-	}
+    }
+
+    @Override
+    public boolean updateSidById(EmployeeVo vo) {
+        Integer row = employeeMapper.updateSidById(vo);
+        if (row > 0 ){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public Map<String, Object>  maxWorkID() {
+
+        Map<String, Object> map = new HashMap<>();
+
+        String maxWorkID= employeeMapper.maxWorkID();
+        //转成int +1
+        Integer newWorkIdInt = Integer.valueOf(maxWorkID) + 1;
+        //装成String
+        String newWorkId = newWorkIdInt.toString();
+        for (int i = 0; i < maxWorkID.length()-newWorkId.length(); i++) {
+            newWorkId = "0" + newWorkId;
+        }
+        map.put("obj",newWorkId);
+        return map;
+
+
+    }
 }

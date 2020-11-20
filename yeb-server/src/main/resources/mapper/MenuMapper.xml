@@ -39,18 +39,7 @@
 		</collection>
 	</resultMap>
 
-	<resultMap id="MenusWithChildren" type="com.xxxx.server.pojo.Menu" extends="BaseResultMap">
-		<id column="id1" property="id"/>
-		<result column="name1" property="name"/>
-		<collection property="children" ofType="com.xxxx.server.pojo.Menu">
-			<id column="id2" property="id"/>
-			<result column="name2" property="name"/>
-			<collection property="children" ofType="com.xxxx.server.pojo.Menu">
-				<id column="id3" property="id"/>
-				<result column="name3" property="name"/>
-			</collection>
-		</collection>
-	</resultMap>
+
 
 	<!-- 通用查询结果列 -->
 	<sql id="Base_Column_List">
@@ -122,5 +111,19 @@
             AND m2.id = m3.parentId
             AND m3.enabled = TRUE
     </select>
+
+    <resultMap id="MenusWithChildren" type="com.xxxx.server.pojo.Menu" extends="BaseResultMap">
+        <id column="id1" property="id"/>
+        <result column="name1" property="name"/>
+        <collection property="children" ofType="com.xxxx.server.pojo.Menu">
+            <id column="id2" property="id"/>
+            <result column="name2" property="name"/>
+            <collection property="children" ofType="com.xxxx.server.pojo.Menu">
+                <id column="id3" property="id"/>
+                <result column="name3" property="name"/>
+            </collection>
+        </collection>
+    </resultMap>
+
 
 </mapper>

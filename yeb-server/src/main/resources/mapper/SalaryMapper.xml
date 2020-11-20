@@ -2,4 +2,62 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xxxx.server.mapper.SalaryMapper">
 
+
+    <select id="listAll" resultMap="listAllMapA">
+                SELECT
+                    t1.id,
+                    t1.name,
+                    t1.workID,
+                    t1.email,
+                    t1.phone,
+
+                    t2.name as departmentname,
+
+                    t3.id,
+                    t3.name as Asalname,
+                    t3.basicSalary,
+                    t3.bonus,
+                    t3.lunchSalary,
+                    t3.trafficSalary,
+                    t3.allSalary,
+                    t3.pensionBase,
+                    t3.pensionPer,
+                    t3.createDate,
+                    t3.medicalBase,
+                    t3.medicalPer,
+                    t3.accumulationFundBase,
+                    t3.accumulationFundPer
+
+                from t_employee t1
+                LEFT JOIN t_department t2 on t1.departmentId=t2.id
+                LEFT JOIN t_salary t3 on t1.salaryId=t3.id
+        </select>
+    <resultMap id="listAllMapA" type="MySalaryInfo">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="workID" property="workID"/>
+        <result column="email" property="email"/>
+        <result column="phone" property="phone"/>
+
+        <association property="department" javaType="com.xxxx.server.pojo.Department">
+            <result column="departmentname" property="name"/>
+        </association>
+        <association property="salary" javaType="com.xxxx.server.pojo.Salary">
+            <id column="id" property="id"/>
+            <result column="Asalname" property="name"/>
+            <result column="basicSalary" property="basicSalary"/>
+            <result column="bonus" property="bonus"/>
+            <result column="lunchSalary" property="lunchSalary"/>
+            <result column="trafficSalary" property="trafficSalary"/>
+            <result column="allSalary" property="allSalary"/>
+            <result column="pensionBase" property="pensionBase"/>
+            <result column="pensionPer" property="pensionPer"/>
+            <result column="medicalBase" property="medicalBase"/>
+            <result column="medicalPer" property="medicalPer"/>
+            <result column="createDate" property="createDate"/>
+            <result column="accumulationFundBase" property="accumulationFundBase"/>
+            <result column="accumulationFundPer" property="accumulationFundPer"/>
+        </association>
+    </resultMap>
+
 </mapper>

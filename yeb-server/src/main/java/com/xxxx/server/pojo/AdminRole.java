@@ -37,5 +37,31 @@ public class AdminRole implements Serializable {
     @ApiModelProperty(value = "权限id")
     private Integer rid;
 
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getAdminId() {
+        return adminId;
+    }
+
+    public void setAdminId(Integer adminId) {
+        this.adminId = adminId;
+    }
+
+    public Integer getRid() {
+        return rid;
+    }
+
+    public void setRid(Integer rid) {
+        this.rid = rid;
+    }
 }
