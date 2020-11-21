@@ -6,6 +6,10 @@ import com.xxxx.server.pojo.*;
 
 import java.util.List;
 import java.util.Map;
+import com.xxxx.server.pojo.Employee;
+import com.xxxx.server.pojo.EmployeeVo;
+
+import java.util.Map;
 
 /**
  * <p>
@@ -17,6 +21,13 @@ import java.util.Map;
 public interface IEmployeeService extends IService<Employee> {
 
 
+    Map<String, Object> queryEmpbyName(EmployeeVo employeeVo);
+
+    boolean updateSidById(EmployeeVo vo);
+
+    Map<String, Object>  maxWorkID();
+
+    boolean save1(Employee employee);
     Map<String, Object> selectAllList(EmployeeVo vo);
     void delectUser(Integer id);
     List<Position> selectPosition();

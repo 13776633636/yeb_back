@@ -1,6 +1,13 @@
 server:
   # 端口
   port: 8081
+# 七牛云存储
+oss:
+  qiniu:
+    domain: http://qdnolc9h2.bkt.clouddn.com # 访问域名(默认使用七牛云测试域名)
+    accessKey: LbO-QxxxxxxxxoF4H3p # 公钥
+    secretKey: TyJAtXx7xxxx_gxbA5k # 私钥
+    bucketName: codeduck  #存储空间名称
 
 spring:
   # 数据源配置
@@ -37,7 +44,7 @@ spring:
     #数据库
     database: 0
     #密码
-    password: root
+    #password: root
     lettuce:
       pool:
         #最大连接数，默认8
@@ -63,6 +70,11 @@ spring:
     publisher-confirm-type: correlated
     #消息失败回调
     publisher-returns: true
+  ## 启用热部署
+  devtools:
+    restart:
+      enabled: true
+      additional-paths: src/main/java
 
 # Mybatis-plus配置
 mybatis-plus:
@@ -89,3 +101,6 @@ jwt:
   expiration: 604800
   # JWT 负载中拿到开头
   tokenHead: Bearer
+
+
+

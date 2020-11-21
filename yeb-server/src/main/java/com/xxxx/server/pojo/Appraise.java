@@ -47,5 +47,55 @@ public class Appraise implements Serializable {
     @ApiModelProperty(value = "备注")
     private String remark;
 
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getEid() {
+        return eid;
+    }
+
+    public void setEid(Integer eid) {
+        this.eid = eid;
+    }
+
+    public LocalDate getAppDate() {
+        return appDate;
+    }
+
+    public void setAppDate(LocalDate appDate) {
+        this.appDate = appDate;
+    }
+
+    public String getAppResult() {
+        return appResult;
+    }
+
+    public void setAppResult(String appResult) {
+        this.appResult = appResult;
+    }
+
+    public String getAppContent() {
+        return appContent;
+    }
+
+    public void setAppContent(String appContent) {
+        this.appContent = appContent;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
 }

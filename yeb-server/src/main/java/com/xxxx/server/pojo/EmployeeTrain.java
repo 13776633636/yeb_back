@@ -44,5 +44,47 @@ public class EmployeeTrain implements Serializable {
     @ApiModelProperty(value = "备注")
     private String remark;
 
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getEid() {
+        return eid;
+    }
+
+    public void setEid(Integer eid) {
+        this.eid = eid;
+    }
+
+    public LocalDate getTrainDate() {
+        return trainDate;
+    }
+
+    public void setTrainDate(LocalDate trainDate) {
+        this.trainDate = trainDate;
+    }
+
+    public String getTrainContent() {
+        return trainContent;
+    }
+
+    public void setTrainContent(String trainContent) {
+        this.trainContent = trainContent;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
 }

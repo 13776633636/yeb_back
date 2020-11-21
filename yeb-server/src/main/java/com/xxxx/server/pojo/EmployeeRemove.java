@@ -50,5 +50,63 @@ public class EmployeeRemove implements Serializable {
     @ApiModelProperty(value = "备注")
     private String remark;
 
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getEid() {
+        return eid;
+    }
+
+    public void setEid(Integer eid) {
+        this.eid = eid;
+    }
+
+    public Integer getAfterDepId() {
+        return afterDepId;
+    }
+
+    public void setAfterDepId(Integer afterDepId) {
+        this.afterDepId = afterDepId;
+    }
+
+    public Integer getAfterJobId() {
+        return afterJobId;
+    }
+
+    public void setAfterJobId(Integer afterJobId) {
+        this.afterJobId = afterJobId;
+    }
+
+    public LocalDate getRemoveDate() {
+        return removeDate;
+    }
+
+    public void setRemoveDate(LocalDate removeDate) {
+        this.removeDate = removeDate;
+    }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
 }
