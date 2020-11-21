@@ -2,4 +2,32 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xxxx.server.mapper.SalaryMapper">
 
+    <select id="selectList" resultMap="salaryCfg">
+        select
+            e1.name as name,
+            e1.workID as workID ,
+            e1.email as email,
+             e1.phone as phone,
+            d1.name as department,
+            s1.id as sid,
+            s1.name as sname
+        from t_employee e1
+         left join t_department d1 on d1.id = e1.departmentId
+         left join t_salary s1 on e1.salaryId = s1.id
+    </select>
+    <resultMap id="salaryCfg" type="com.xxxx.server.pojo.SalarySobCfg">
+        <result property="name" column="name"></result>
+        <result property="workID" column="workID"></result>
+        <result property="email" column="email"></result>
+        <result property="phone" column="phone"></result>
+        <result property="department" column="department"></result>
+        <association property="salary" javaType="com.xxxx.server.pojo.Salary">
+            <id property="id" column="sid"></id>
+            <result property="name" column="sname"></result>
+
+        </association>
+    </resultMap>
+
+
 </mapper>
+

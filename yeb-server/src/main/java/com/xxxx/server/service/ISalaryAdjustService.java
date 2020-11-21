@@ -1,7 +1,10 @@
 package com.xxxx.server.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.xxxx.server.pojo.Employee;
 import com.xxxx.server.pojo.SalaryAdjust;
+
+import java.util.List;
 
 /**
  * <p>
@@ -10,6 +13,8 @@ import com.xxxx.server.pojo.SalaryAdjust;
  *
  * @author zhoubin
  */
+
 public interface ISalaryAdjustService extends IService<SalaryAdjust> {
 
+    List<Employee> selectList();
 }
