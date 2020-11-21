@@ -1,3 +1,4 @@
+/*
 package com.xxxx.server.utils;
 
 
@@ -8,11 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+*/
 /**
  * 测试文件导出
  * @author liuyazhuang
  *
- */
+ *//*
+
 public class Test {
 
     public static void main(String[] args) throws Exception{
@@ -27,4 +30,4 @@ public class Test {
         String[] columnNames = { "ID", "姓名", "性别" };
         util.exportExcel("用户导出", columnNames, list, new FileOutputStream("E:/test.xls"), ExportExcelUtils.EXCEL_FILE_2003);
     }
-}
+}*/

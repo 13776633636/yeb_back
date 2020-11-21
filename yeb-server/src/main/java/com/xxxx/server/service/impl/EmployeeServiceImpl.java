@@ -126,4 +126,13 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee> i
 
 
     }
+
+    @Override
+    public boolean save1(Employee employee) {
+        int row = employeeMapper.save1(employee);
+        if (row>0){
+            return true;
+        }
+        return false;
+    }
 }

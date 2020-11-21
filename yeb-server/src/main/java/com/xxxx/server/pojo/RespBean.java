@@ -1,22 +1,50 @@
 package com.xxxx.server.pojo;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 /**
  * 公共返回对象
  *
  * @author zhoubin
  * @since 1.0.0
  */
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+
+
 public class RespBean {
 	private long code;
 	private String message;
 	private Object obj;
+
+	public RespBean() {
+	}
+
+	public RespBean(long code, String message, Object obj) {
+		this.code = code;
+		this.message = message;
+		this.obj = obj;
+	}
+
+	public long getCode() {
+		return code;
+	}
+
+	public void setCode(long code) {
+		this.code = code;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	public Object getObj() {
+		return obj;
+	}
+
+	public void setObj(Object obj) {
+		this.obj = obj;
+	}
 
 	/**
 	 * 成功返回结果
@@ -24,6 +52,7 @@ public class RespBean {
 	 * @return
 	 */
 	public static RespBean success(String message){
+
 		return new RespBean(200,message,null);
 	}
 

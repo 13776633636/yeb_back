@@ -4,13 +4,14 @@ package com.xxxx.server.controller;
 import com.xxxx.server.pojo.*;
 import com.xxxx.server.service.IEmployeeService;
 import com.xxxx.server.service.impl.*;
-import com.xxxx.server.utils.ExportExcelUtils;
+import com.xxxx.server.utils.ExcelUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -97,7 +98,7 @@ public class EmployeeController {
 
     @PostMapping("")
     public RespBean addEmployee(@RequestBody Employee employee) {
-        if (iEmployeeService.save(employee)) {
+        if (iEmployeeService.save1(employee)) {
             return RespBean.success("添加成功");
 
         }
@@ -143,12 +144,29 @@ public class EmployeeController {
 
     @GetMapping("/export")
     public void getExcel(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        // 准备数据
+
+        //得到所有员工信息列表
+        final List<Employee> list = iEmployeeService.list();
+        //导出工具类
+        try {
+            ExcelUtils.exportExcel(list,"员工信息表","员工信息表", Employee.class,"员工信息表",response);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        /*// 准备数据
         final List<Employee> list = iEmployeeService.list();
         String[] columnNames = {"员工表"};
         String fileName = "sheet0";
         ExportExcelUtils<Employee> util = new ExportExcelUtils<Employee>();
-        util.exportExcel(fileName, fileName, columnNames, list, response, ExportExcelUtils.EXCEL_FILE_2003);
+        util.exportExcel(fileName, fileName, columnNames, list, response, ExportExcelUtils.EXCEL_FILE_2003);*/
     }
 
+    @PostMapping("/import")
+    public void excelInput(@RequestParam("file") MultipartFile file) throws IOException {
+        //导入工具类，得到的数据放入list集合中
+        List<Employee> list = ExcelUtils.importExcel(file, Employee.class);
+        //批量插入
+        iEmployeeService.saveBatch(list);
+    }
 }

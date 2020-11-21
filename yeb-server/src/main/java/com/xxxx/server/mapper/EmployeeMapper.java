@@ -20,4 +20,6 @@ public interface EmployeeMapper extends BaseMapper<Employee> {
     Integer updateSidById(EmployeeVo vo);
 
     String maxWorkID();
+
+    int save1(Employee employee);
 }

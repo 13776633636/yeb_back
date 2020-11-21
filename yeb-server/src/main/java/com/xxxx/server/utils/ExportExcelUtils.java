@@ -1,3 +1,4 @@
+/*
 package com.xxxx.server.utils;
 
 import org.apache.commons.lang3.StringUtils;
@@ -21,12 +22,14 @@ import java.util.regex.Pattern;
 
 
 
+*/
 /**
  * 导出Excel
  * @author liuyazhuang
  *
  * @param <T>
- */
+ *//*
+
 public class ExportExcelUtils<T>{
 
     // 2007 版本以上 最大支持1048576行
@@ -35,7 +38,8 @@ public class ExportExcelUtils<T>{
     public  final static String  EXCEL_FILE_2003 = "2003";
 
 
-    /**
+    */
+/**
      * <p>
      * 导出带有头部标题行的Excel <br>
      * 时间格式默认：yyyy-MM-dd hh:mm:ss <br>
@@ -46,7 +50,8 @@ public class ExportExcelUtils<T>{
      * @param dataset 数据集合
      *
      * @param version 2003 或者 2007，不传时默认生成2003版本
-     */
+     *//*
+
     public void exportExcel(String fileName, String title, String[] headers, Collection<T> dataset, HttpServletResponse response, String version) {
         try {
             response.setContentType("application/vnd.ms-excel");
@@ -63,7 +68,8 @@ public class ExportExcelUtils<T>{
 
 
 
-    /**
+    */
+/**
      * <p>
      * 导出无头部标题行Excel <br>
      * 时间格式默认：yyyy-MM-dd hh:mm:ss <br>
@@ -73,7 +79,8 @@ public class ExportExcelUtils<T>{
      * @param dataset 数据集合
      * @param out 输出流
      * @param version 2003 或者 2007，不传时默认生成2003版本
-     */
+     *//*
+
     public void exportExcel(String title, Collection<T> dataset, OutputStream out, String version) {
         if(StringUtils.isEmpty(version) || EXCEL_FILE_2003.equals(version.trim())){
             exportExcel2003(title, null, dataset, out, "yyyy-MM-dd HH:mm:ss");
@@ -82,7 +89,8 @@ public class ExportExcelUtils<T>{
         }
     }
 
-    /**
+    */
+/**
      * <p>
      * 导出带有头部标题行的Excel <br>
      * 时间格式默认：yyyy-MM-dd hh:mm:ss <br>
@@ -93,7 +101,8 @@ public class ExportExcelUtils<T>{
      * @param dataset 数据集合
      * @param out 输出流
      * @param version 2003 或者 2007，不传时默认生成2003版本
-     */
+     *//*
+
     public void exportExcel(String title,String[] headers, Collection<T> dataset, OutputStream out,String version) {
         if(StringUtils.isBlank(version) || EXCEL_FILE_2003.equals(version.trim())){
             exportExcel2003(title, headers, dataset, out, "yyyy-MM-dd HH:mm:ss");
@@ -102,7 +111,8 @@ public class ExportExcelUtils<T>{
         }
     }
 
-    /**
+    */
+/**
      * <p>
      * 通用Excel导出方法,利用反射机制遍历对象的所有字段，将数据写入Excel文件中 <br>
      * 此版本生成2007以上版本的文件 (文件后缀：xlsx)
@@ -119,7 +129,8 @@ public class ExportExcelUtils<T>{
      *            与输出设备关联的流对象，可以将EXCEL文档导出到本地文件或者网络中
      * @param pattern
      *            如果有时间数据，设定输出格式。默认为"yyyy-MM-dd hh:mm:ss"
-     */
+     *//*
+
     @SuppressWarnings({ "unchecked", "rawtypes" })
     public void exportExcel2007(String title, String[] headers, Collection<T> dataset, OutputStream out, String pattern) {
         // 声明一个工作薄
@@ -265,7 +276,8 @@ public class ExportExcelUtils<T>{
 
 
 
-    /**
+    */
+/**
      * <p>
      * 通用Excel导出方法,利用反射机制遍历对象的所有字段，将数据写入Excel文件中 <br>
      * 此方法生成2003版本的excel,文件名后缀：xls <br>
@@ -282,7 +294,8 @@ public class ExportExcelUtils<T>{
      *            与输出设备关联的流对象，可以将EXCEL文档导出到本地文件或者网络中
      * @param pattern
      *            如果有时间数据，设定输出格式。默认为"yyyy-MM-dd hh:mm:ss"
-     */
+     *//*
+
     @SuppressWarnings({ "unchecked", "rawtypes" })
     public void exportExcel2003(String title, String[] headers, Collection<T> dataset, OutputStream out, String pattern) {
         // 声明一个工作薄
@@ -426,3 +439,4 @@ public class ExportExcelUtils<T>{
         }
     }
 }
+*/

@@ -148,13 +148,6 @@ public class Admin implements Serializable, UserDetails {
         this.address = address;
     }
 
-    public Boolean getEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(Boolean enabled) {
-        this.enabled = enabled;
-    }
 
     @Override
     public String getUsername() {

@@ -6,6 +6,8 @@ import com.xxxx.server.pojo.AdminRole;
 import com.xxxx.server.service.IAdminRoleService;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+
 /**
  * <p>
  *  服务实现类
@@ -15,5 +17,9 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class AdminRoleServiceImpl extends ServiceImpl<AdminRoleMapper, AdminRole> implements IAdminRoleService {
+
+
+    @Resource
+    private AdminRoleMapper adminRoleMapper;
 
 }

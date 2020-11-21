@@ -1,6 +1,14 @@
 server:
   # 端口
   port: 8081
+# 七牛云存储
+oss:
+  qiniu:
+    domain: http://qdnolc9h2.bkt.clouddn.com # 访问域名(默认使用七牛云测试域名)
+    accessKey: LbO-QxxxxxxxxoF4H3p # 公钥
+    secretKey: TyJAtXx7xxxx_gxbA5k # 私钥
+    bucketName: codeduck  #存储空间名称
+
 spring:
   # 数据源配置
   datasource:
@@ -93,3 +101,6 @@ jwt:
   expiration: 604800
   # JWT 负载中拿到开头
   tokenHead: Bearer
+
+
+
