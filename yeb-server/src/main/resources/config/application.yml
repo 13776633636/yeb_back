@@ -1,3 +1,5 @@
+
+
 server:
   # 端口
   port: 8081
@@ -44,7 +46,7 @@ spring:
     #数据库
     database: 0
     #密码
-    #password: root
+    password: root
     lettuce:
       pool:
         #最大连接数，默认8
@@ -70,7 +72,10 @@ spring:
     publisher-confirm-type: correlated
     #消息失败回调
     publisher-returns: true
-  ## 启用热部署
+
+
+    ## 启用热部署
+
   devtools:
     restart:
       enabled: true

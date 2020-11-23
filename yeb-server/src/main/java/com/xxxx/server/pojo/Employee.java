@@ -2,6 +2,7 @@ package com.xxxx.server.pojo;
 
 import cn.afterturn.easypoi.excel.annotation.Excel;
 import cn.afterturn.easypoi.excel.annotation.ExcelEntity;
+import cn.afterturn.easypoi.excel.annotation.ExcelTarget;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -28,6 +29,7 @@ import java.time.LocalDate;
 @Accessors(chain = true)
 @TableName("t_employee")
 @ApiModel(value="Employee对象", description="")
+@ExcelTarget("员工")
 public class Employee implements Serializable {
 
     private static final long serialVersionUID = 1L;

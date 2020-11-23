@@ -2,6 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xxxx.server.mapper.EmployeeMapper">
 
+    <sql id="emp_column">
+        id, name, gender, birthday, idCard, wedlock, nationId,
+        nativePlace, politicId, email, phone, address, departmentId, jobLevelId, posId, engageForm,
+        tiptopDegree, specialty, school, beginDate, workState, workID, contractTerm, conversionTime,
+        notWorkDate, beginContract, endContract, workAge, salaryId
+    </sql>
+
+
     <!-- 通过条件查询员工列表 -->
     <select id="queryEmpbyName" parameterType="com.xxxx.server.pojo.EmployeeVo" resultMap="empResultMap">
         select
@@ -50,8 +58,8 @@
     </select>
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="empResultMap" type="com.xxxx.server.pojo.EmpMsg">
-        <id column="id" property="id" />
+    <resultMap id="empResultMap" type="com.xxxx.server.pojo.Employee">
+        <id column="eid" property="id" />
         <result column="name" property="name" />
         <result column="gender" property="gender" />
         <result column="birthday" property="birthday" />
@@ -81,23 +89,23 @@
         <result column="workAge" property="workAge" />
         <result column="salaryId" property="salaryId" />
         <association property="nation" javaType="com.xxxx.server.pojo.Nation">
-            <id property="id" column="id" />
+            <id property="id" column="nid" />
             <result property="name" column="nname" />
         </association>
         <association property="position" javaType="com.xxxx.server.pojo.Position">
-            <id property="id" column="id" />
+            <id property="id" column="pid" />
             <result property="name" column="pname" />
         </association>
         <association property="joblevel" javaType="com.xxxx.server.pojo.Joblevel">
-            <id property="id" column="id" />
+            <id property="id" column="jid" />
             <result property="name" column="jname" />
         </association>
         <association property="department" javaType="com.xxxx.server.pojo.Department">
-            <id property="id" column="id" />
+            <id property="id" column="did" />
             <result property="name" column="dname" />
         </association>
         <association property="politicsStatus" javaType="com.xxxx.server.pojo.PoliticsStatus">
-            <id property="id" column="id" />
+            <id property="id" column="jid" />
             <result property="name" column="staname" />
         </association>
     </resultMap>
@@ -107,7 +115,64 @@
         set salaryId = #{sid}
         where id = #{eid}
     </update>
+    <!--自定义映射2-->
+    <resultMap id="employeeMap" type="com.xxxx.server.pojo.Employee">
+        <id property="id" column="id"></id>
+        <result property="name" column="name"></result>
+        <result property="gender" column="gender"></result>
+        <result property="birthday" column="birthday"></result>
+        <result property="idCard" column="idCard"></result>
+        <result property="wedlock" column="wedlock"></result>
+        <result property="nationId" column="nationId"></result>
+        <result property="nativePlace" column="nativePlace"></result>
+        <result property="politicId" column="politicId"></result>
+        <result property="email" column="email"></result>
+        <result property="phone" column="phone"></result>
+        <result property="address" column="address"></result>
+        <result property="departmentId" column="departmentId"></result>
+        <result property="jobLevelId" column="jobLevelId"></result>
+        <result property="posId" column="posId"></result>
+        <result property="engageForm" column="engageForm"></result>
+        <result property="tiptopDegree" column="tiptopDegree"></result>
+        <result property="specialty" column="specialty"></result>
+        <result property="school" column="school"></result>
+        <result property="beginDate" column="beginDate"></result>
+        <result property="workState" column="workState"></result>
+        <result property="workID" column="workID"></result>
+        <result property="contractTerm" column="contractTerm"></result>
+        <result property="conversionTime" column="conversionTime"></result>
+        <result property="notWorkDate" column="notWorkDate"></result>
+        <result property="beginContract" column="beginContract"></result>
+        <result property="endContract" column="endContract"></result>
+        <result property="salaryId" column="salaryId"></result>
 
+        <association property="nation" javaType="com.xxxx.server.pojo.Nation">
+            <id property="id" column="id"></id>
+            <result property="name" column="nationName"></result>
+        </association>
+        <association property="politicsStatus" javaType="com.xxxx.server.pojo.PoliticsStatus">
+            <id property="id" column="id"></id>
+            <result property="name" column="polName"></result>
+        </association>
+        <association property="department" javaType="com.xxxx.server.pojo.Department">
+            <id property="id" column="id"></id>
+            <result property="name" column="depName"></result>
+            <result property="parentId" column="parentId"></result>
+            <result property="depPath" column="depPath"></result>
+            <result property="enabled" column="enabled"></result>
+            <result property="isParent" column="isParent"></result>
+        </association>
+        <association property="joblevel" javaType="com.xxxx.server.pojo.Joblevel">
+            <id property="id" column="id"></id>
+            <result property="name" column="jobName"></result>
+        </association>
+        <association property="position" javaType="com.xxxx.server.pojo.Position">
+            <id property="id" column="id"></id>
+            <result property="name" column="posName"></result>
+            <result property="createDate" column="createDate"></result>
+            <result property="enabled" column="enabled"></result>
+        </association>
+    </resultMap >
 
     <select id="maxWorkID" resultType="String">
         SELECT max(t_employee.workID) as workID
@@ -115,7 +180,40 @@
 
     </select>
 
-    <insert id="save1" parameterType="Employee">
+
+    <!--根据主键id查询员工信息-->
+    <select id="selectEmployeeById"  parameterType="integer" resultMap="empResultMap">
+       select
+        emp.id eid, emp.name, gender, birthday, idCard, wedlock, nationId, nativePlace, politicId, email, phone, address,
+        departmentId, jobLevelId, posId, engageForm,
+         tiptopDegree, specialty, school, beginDate,
+          workState, workID, contractTerm, conversionTime,
+           notWorkDate, beginContract, endContract, workAge, salaryId
+        ,nat.id nid,
+        nat.name nname,
+        pos.id pid,
+         pos.name pname,
+        dep.id did,
+        dep.name dname,
+        jobl.id jid,
+        jobl.name jname,
+        sta.id sid,
+        sta.name staname
+        from
+        t_employee as emp,t_nation as nat,t_position as pos,
+        t_department as dep,t_joblevel as jobl,t_politics_status as sta
+        where
+         emp.nationId = nat.id and emp.politicId = sta.id and emp.departmentId = dep.id and
+            emp.jobLevelId = jobl.id and emp.posId = pos.id
+          and emp.id = #{id}
+    </select>
+
+
+
+    <insert id="save1" parameterType="com.xxxx.server.pojo.Employee" useGeneratedKeys="true" keyProperty="id">
+        <selectKey keyProperty="id" resultType="integer" order="AFTER">
+            select LAST_INSERT_ID()
+        </selectKey>
         insert into t_employee
         ( id,
         name,gender,birthday,idCard,wedlock,nationId,nativePlace,politicId,email,
@@ -153,7 +251,6 @@
         #{salaryId}
 
          )
-
 
     </insert>
 

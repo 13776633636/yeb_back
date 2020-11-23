@@ -17,7 +17,6 @@ import java.sql.SQLIntegrityConstraintViolationException;
 public class GlobalException {
 
 
-
 	@ExceptionHandler(value = Exception.class)
 	public RespBean exceptionHandler(Exception e) {
 

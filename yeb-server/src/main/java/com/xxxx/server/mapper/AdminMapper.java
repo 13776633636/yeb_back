@@ -24,4 +24,12 @@ public interface AdminMapper extends BaseMapper<Admin> {
 	List<Admin> getAllAdmins(@Param("id") Integer id, @Param("keywords") String keywords);
 
     List<Admin> queryBYName(String keywords);
+
+    int updateMyPic(@Param("id") Integer id, @Param("userFace") String userFace);
+
+    String getPass(Integer adminId);
+
+	int updatepass(Integer adminId, String encode);
+
+	List<Admin> listAll(String keywords);
 }

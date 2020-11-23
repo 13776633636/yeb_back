@@ -1,6 +1,8 @@
 package com.xxxx.server.controller;
 
 
+import cn.afterturn.easypoi.excel.entity.ImportParams;
+import com.xxxx.server.mapper.EmployeeMapper;
 import com.xxxx.server.pojo.*;
 import com.xxxx.server.service.IEmployeeService;
 import com.xxxx.server.service.impl.*;
@@ -8,10 +10,10 @@ import com.xxxx.server.utils.ExcelUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -100,7 +102,6 @@ public class EmployeeController {
     public RespBean addEmployee(@RequestBody Employee employee) {
         if (iEmployeeService.save1(employee)) {
             return RespBean.success("添加成功");
-
         }
         return RespBean.error("添加失败");
     }
@@ -141,31 +142,32 @@ public class EmployeeController {
         return maxWorkID;
     }*/
 
+    @Autowired
+    private EmployeeMapper employeeMapper;
 
     @GetMapping("/export")
     public void getExcel(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         //得到所有员工信息列表
-        final List<Employee> list = iEmployeeService.list();
+        EmployeeVo employeeVo = new EmployeeVo();
+        final List<Employee> list =employeeMapper.queryEmpbyName(employeeVo);
+        System.out.println(list);
         //导出工具类
         try {
             ExcelUtils.exportExcel(list,"员工信息表","员工信息表", Employee.class,"员工信息表",response);
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
-
-        /*// 准备数据
-        final List<Employee> list = iEmployeeService.list();
-        String[] columnNames = {"员工表"};
-        String fileName = "sheet0";
-        ExportExcelUtils<Employee> util = new ExportExcelUtils<Employee>();
-        util.exportExcel(fileName, fileName, columnNames, list, response, ExportExcelUtils.EXCEL_FILE_2003);*/
     }
 
     @PostMapping("/import")
-    public void excelInput(@RequestParam("file") MultipartFile file) throws IOException {
+    public void excelInput(@RequestParam("file") MultipartFile file) throws Exception {
+        ImportParams params = new ImportParams();
+        params.setTitleRows(1);
+        params.setHeadRows(1);
+        List<Employee> list = ExcelUtils.importExcel(file.getInputStream(), Employee.class, params);
         //导入工具类，得到的数据放入list集合中
-        List<Employee> list = ExcelUtils.importExcel(file, Employee.class);
+        //List<Employee> list = ExcelUtils.importExcel(file, Employee.class,);
         //批量插入
         iEmployeeService.saveBatch(list);
     }

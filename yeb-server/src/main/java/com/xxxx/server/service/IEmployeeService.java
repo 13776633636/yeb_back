@@ -23,4 +23,6 @@ public interface IEmployeeService extends IService<Employee> {
     Map<String, Object>  maxWorkID();
 
     boolean save1(Employee employee);
+
+
 }

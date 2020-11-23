@@ -12,4 +12,5 @@ import com.xxxx.server.pojo.AdminRole;
  */
 public interface IAdminRoleService extends IService<AdminRole> {
 
+    int insertRole(Integer adminId, Integer[] rids);
 }

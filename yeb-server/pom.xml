@@ -113,12 +113,6 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-pool2</artifactId>
 		</dependency>
-		<!--easy poi依赖-->
-		<dependency>
-			<groupId>cn.afterturn</groupId>
-			<artifactId>easypoi-spring-boot-starter</artifactId>
-			<version>4.1.3</version>
-		</dependency>
 		<!--rabbitmq 依赖-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -130,52 +124,34 @@
 			<artifactId>spring-boot-starter-websocket</artifactId>
 		</dependency>
 		<!--POI操作的依赖-->
-		<!--<dependency>
-			<groupId>org.apache.poi</groupId>
-			<artifactId>poi-scratchpad</artifactId>
-			<version>3.11-beta2</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.poi</groupId>
-			<artifactId>poi-ooxml</artifactId>
-			<version>3.11-beta2</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.poi</groupId>
-			<artifactId>poi-ooxml-schemas</artifactId>
-			<version>3.11-beta2</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.poi</groupId>
-			<artifactId>poi-excelant</artifactId>
-			<version>3.11-beta2</version>
-		</dependency>
--->
-		<dependency>
-			<groupId>cn.afterturn</groupId>
-			<artifactId>easypoi-spring-boot-starter</artifactId>
-			<version>4.2.0</version>
-		</dependency>
+		<!--EasyPoi 依赖-->
 		<dependency>
 			<groupId>cn.afterturn</groupId>
 			<artifactId>easypoi-base</artifactId>
-			<version>4.2.0</version>
+			<version>4.1.3</version>
 		</dependency>
 		<dependency>
 			<groupId>cn.afterturn</groupId>
 			<artifactId>easypoi-web</artifactId>
-			<version>4.2.0</version>
+			<version>4.1.3</version>
 		</dependency>
 		<dependency>
 			<groupId>cn.afterturn</groupId>
 			<artifactId>easypoi-annotation</artifactId>
-			<version>4.2.0</version>
+			<version>4.1.3</version>
 		</dependency>
 		<!--七牛-->
 		<dependency>
 			<groupId>com.qiniu</groupId>
 			<artifactId>qiniu-java-sdk</artifactId>
-			<version>7.2.7</version>
+			<version>[7.3.0, 7.3.99]</version>
+		</dependency>
+		<!--okhttp-->
+		<dependency>
+			<groupId>com.squareup.okhttp3</groupId>
+			<artifactId>okhttp</artifactId>
+			<version>3.14.2</version>
+			<scope>compile</scope>
 		</dependency>
 
 		<!--FastDFS依赖-->

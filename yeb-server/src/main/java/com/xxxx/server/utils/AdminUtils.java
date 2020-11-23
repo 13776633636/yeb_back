@@ -17,7 +17,8 @@ public class AdminUtils {
 	 * @return
 	 */
 	public static Admin getCurrentAdmin() {
-		return (Admin) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Admin admin = (Admin) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		return admin;
 	}
 
 }

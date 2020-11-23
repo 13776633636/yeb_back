@@ -2,6 +2,7 @@ package com.xxxx.server.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.xxxx.server.pojo.Admin;
+import com.xxxx.server.pojo.AdminVO;
 import com.xxxx.server.pojo.RespBean;
 import com.xxxx.server.pojo.Role;
 
@@ -40,4 +41,9 @@ public interface IAdminService extends IService<Admin> {
 	 */
 	List<Role> getRoles(Integer adminId);
 
+	int updateMyPic(Integer id, String userFace);
+
+	Integer updatePass(AdminVO adminVO);
+
+    List<Admin> listAll(String keywords);
 }

@@ -22,4 +22,8 @@ public interface EmployeeMapper extends BaseMapper<Employee> {
     String maxWorkID();
 
     int save1(Employee employee);
+
+    Employee selectEmployeeById(Integer id);
+
+
 }

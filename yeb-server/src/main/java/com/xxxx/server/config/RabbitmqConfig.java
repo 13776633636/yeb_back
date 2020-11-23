@@ -45,6 +45,7 @@ public class RabbitMQConfig {
 		 */
 		rabbitTemplate.setConfirmCallback((data,ack,cause)->{
 			String msgId = data.getId();
+			System.out.println(msgId);
 			if(ack){
 				LOGGER.info("{}=======>消息发送成功",msgId);
 				mailLogService.update(new UpdateWrapper<MailLog>().set("status",1).eq("msgId",msgId));
@@ -52,6 +53,7 @@ public class RabbitMQConfig {
 				LOGGER.error("{}=======>消息发送失败",msgId);
 			}
 		});
+
 		/**
 		 * 消息失败回调，比如router不到queue时回调
 		 * msg：消息主题
@@ -63,6 +65,7 @@ public class RabbitMQConfig {
 		rabbitTemplate.setReturnCallback((msg,repCode,repText,exchange,routingkey)->{
 			LOGGER.error("{}=======>消息发送queue时失败",msg.getBody());
 		});
+
 		return rabbitTemplate;
 	}
 
@@ -78,7 +81,8 @@ public class RabbitMQConfig {
 
 	@Bean
 	public Binding binding(){
-		return BindingBuilder.bind(queue()).to(directExchange()).with(MailConstants.MAIL_ROUTING_KEY_NAME);
+		return BindingBuilder.bind(queue()).
+				to(directExchange()).with(MailConstants.MAIL_ROUTING_KEY_NAME);
 	}
 
 }

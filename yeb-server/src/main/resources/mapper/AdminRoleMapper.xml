@@ -22,4 +22,13 @@
         </foreach>
     </update>
 
+    <insert id="insertRole" >
+        insert into t_admin_role
+        (adminId,rid)
+        values
+        <foreach collection="rids"  item="i" separator="," >
+            (#{adminId},#{i})
+        </foreach>
+    </insert>
+
 </mapper>

@@ -7,7 +7,9 @@ import com.xxxx.server.mapper.EmployeeMapper;
 import com.xxxx.server.mapper.MailLogMapper;
 import com.xxxx.server.pojo.Employee;
 import com.xxxx.server.pojo.EmployeeVo;
+import com.xxxx.server.pojo.MailConstants;
 import com.xxxx.server.service.IEmployeeService;
+import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -16,6 +18,7 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * <p>
@@ -131,6 +134,9 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee> i
     public boolean save1(Employee employee) {
         int row = employeeMapper.save1(employee);
         if (row>0){
+            //String email = employee.getEmail();
+            Employee newEmp = employeeMapper.selectEmployeeById(employee.getId());
+            rabbitTemplate.convertAndSend(MailConstants.MAIL_EXCHANGE_NAME,MailConstants.MAIL_ROUTING_KEY_NAME,newEmp,new CorrelationData(UUID.randomUUID().toString()));
             return true;
         }
         return false;

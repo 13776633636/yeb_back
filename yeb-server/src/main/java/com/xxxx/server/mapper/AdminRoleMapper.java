@@ -20,4 +20,6 @@ public interface AdminRoleMapper extends BaseMapper<AdminRole> {
 	 * @return
 	 */
 	Integer addAdminRole(@Param("adminId") Integer adminId, @Param("rids") Integer[] rids);
+
+    int insertRole(@Param("adminId") Integer adminId, @Param("rids") Integer[] rids);
 }

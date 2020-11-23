@@ -7,9 +7,11 @@ import com.xxxx.server.mapper.AdminMapper;
 import com.xxxx.server.mapper.AdminRoleMapper;
 import com.xxxx.server.mapper.RoleMapper;
 import com.xxxx.server.pojo.Admin;
+import com.xxxx.server.pojo.AdminVO;
 import com.xxxx.server.pojo.RespBean;
 import com.xxxx.server.pojo.Role;
 import com.xxxx.server.service.IAdminService;
+import com.xxxx.server.utils.AssertUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -104,5 +106,35 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
 	public List<Role> getRoles(Integer adminId) {
 		return roleMapper.getRoles(adminId);
 	}
+
+    @Override
+    public int updateMyPic(Integer id, String userFace) {
+		int row = adminMapper.updateMyPic(id,userFace);
+		return row;
+    }
+
+    @Override
+    public Integer updatePass(AdminVO adminVO) {
+		Integer adminId = adminVO.getAdminId();
+		//数据库中的密码
+		String oldpass = adminMapper.getPass(adminId);
+		//boolean matches = passwordEncoder.matches(adminVO.getOldPass(), oldpass);
+
+		AssertUtil.isTrue( !passwordEncoder.matches(adminVO.getOldPass(),oldpass),"密码不正确",400);
+		AssertUtil.isTrue( passwordEncoder.matches(adminVO.getCheckPass(),oldpass),"新密码与旧密码相同",400);
+
+
+		//将新密码更新到数据库
+		String encode = passwordEncoder.encode(adminVO.getCheckPass());
+		int rows = adminMapper.updatepass(adminId,encode);
+		return rows;
+    }
+
+    @Override
+    public List<Admin> listAll(String keywords) {
+        List<Admin> list = adminMapper.listAll(keywords);
+		
+		return list;
+    }
 
 }

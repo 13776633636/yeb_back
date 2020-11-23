@@ -2,8 +2,16 @@
 package com.xxxx.server.controller;
 
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.xxxx.server.pojo.Admin;
+import com.xxxx.server.pojo.RespBean;
+import com.xxxx.server.pojo.Role;
+import com.xxxx.server.service.IAdminRoleService;
+import com.xxxx.server.service.IAdminService;
+import com.xxxx.server.service.IRoleService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,7 +21,44 @@ import org.springframework.web.bind.annotation.RestController;
  * @author zhoubin
  */
 @RestController
-@RequestMapping("/system/admin")
+@RequestMapping("/system")
 public class AdminController {
 
+    @Autowired
+    private IAdminService adminService;
+    @Autowired
+    private IRoleService roleService;
+    @Autowired
+    private IAdminRoleService adminRoleService;
+
+
+    @GetMapping("/admin")
+    public List<Admin> list(String keywords){
+        List<Admin> list = adminService.listAll(keywords);
+        return list;
+    }
+
+    @GetMapping("/admin/roles")
+    public List<Role> listAllRoles(){
+        List<Role> list = roleService.list();
+        return list;
+    }
+
+    @PutMapping("/admin/role")
+    public RespBean updateRole(Integer adminId,Integer[]rids){
+        boolean b = adminRoleService.removeById(adminId);
+
+        int rows = adminRoleService.insertRole(adminId ,rids);
+        if(rows>0){
+            return RespBean.success("修改成功");
+        }
+       return RespBean.error("修改失败");
+    }
+    @DeleteMapping("/admin/{id}")
+    public RespBean deleteRole(@PathVariable Integer id){
+       if (adminService.removeById(id)){
+          return RespBean.success("删除成功");
+       }
+       return RespBean.error("删除失败");
+    }
 }

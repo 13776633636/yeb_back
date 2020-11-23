@@ -22,4 +22,9 @@ public class AdminRoleServiceImpl extends ServiceImpl<AdminRoleMapper, AdminRole
     @Resource
     private AdminRoleMapper adminRoleMapper;
 
+    @Override
+    public int insertRole(Integer adminId, Integer[] rids) {
+        int rows = adminRoleMapper.insertRole(adminId,rids);
+        return rows;
+    }
 }
