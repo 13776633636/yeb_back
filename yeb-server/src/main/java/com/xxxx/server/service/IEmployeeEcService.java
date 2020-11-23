@@ -1,7 +1,10 @@
 package com.xxxx.server.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.xxxx.server.po.EmployeeVo;
 import com.xxxx.server.pojo.EmployeeEc;
+
+import java.util.Map;
 
 /**
  * <p>
@@ -11,5 +14,6 @@ import com.xxxx.server.pojo.EmployeeEc;
  * @author zhoubin
  */
 public interface IEmployeeEcService extends IService<EmployeeEc> {
+
 
 }
