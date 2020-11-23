@@ -53,4 +53,15 @@ public class DepartmentServiceImpl extends ServiceImpl<DepartmentMapper, Departm
 
         return resultList;
     }
+
+    @Override
+    public Integer queryById(String id) {
+        Integer isParent = departmentMapper.queryById(id);
+        return isParent;
+    }
+
+    @Override
+    public void updateIsParent(Integer parentId) {
+        departmentMapper.updateIsParent(parentId);
+    }
 }

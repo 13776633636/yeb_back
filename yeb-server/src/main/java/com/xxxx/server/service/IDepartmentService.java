@@ -16,4 +16,8 @@ public interface IDepartmentService extends IService<Department> {
 
 
    List<Department> listAll();
+
+    Integer queryById(String id);
+
+    void updateIsParent(Integer parentId);
 }

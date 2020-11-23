@@ -17,23 +17,37 @@
 
 
 
-    <resultMap id="selectListMap" type="Department">
+    <resultMap id="selectListMap" type="com.xxxx.server.pojo.Department">
         <id property="id" column="pId"/>
 
         <result property="name" column="pMenuName"/>
         <result property="parentId" column="pPid"/>
 
-        <collection property="children" ofType="Department" javaType="List">
+        <collection property="children" ofType="com.xxxx.server.pojo.Department" javaType="List">
             <id property="id" column="sId"/>
             <result property="name" column="sMenuName"/>
             <result property="parentId" column="sPid"/>
         </collection>
     </resultMap>
 
-    <select id="listAll" resultType="Department">
+    <select id="listAll" resultType="com.xxxx.server.pojo.Department">
         select *
         from t_department
     </select>
+
+    <select id="queryById" parameterType="String" resultType="Integer">
+        select t_department.isParent
+        from t_department
+        where t_department.id=#{id}
+
+    </select>
+
+    <update id="updateIsParent" parameterType="Integer">
+        update t_department
+        set isParent = 1
+        where id=#{parentId}
+
+    </update>
 
 
 

@@ -2,12 +2,9 @@ package com.xxxx.server.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.xxxx.server.mapper.EmployeeEcMapper;
-import com.xxxx.server.po.EmployeeVo;
 import com.xxxx.server.pojo.EmployeeEc;
 import com.xxxx.server.service.IEmployeeEcService;
 import org.springframework.stereotype.Service;
-
-import java.util.Map;
 
 /**
  * <p>
@@ -18,6 +15,5 @@ import java.util.Map;
  */
 @Service
 public class EmployeeEcServiceImpl extends ServiceImpl<EmployeeEcMapper, EmployeeEc> implements IEmployeeEcService {
-
 
 }

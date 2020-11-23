@@ -25,14 +25,6 @@ public class RespPageBean {
 	 */
 	private List<?> data;
 
-   /* public Object getCurrentPage() {
-}*/
-
-
-	private int CurrentPage;
-
-
-   private int size;
 	public Long getTotal() {
 		return total;
 	}
