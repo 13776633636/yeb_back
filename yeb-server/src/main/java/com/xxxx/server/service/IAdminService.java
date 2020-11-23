@@ -46,4 +46,6 @@ public interface IAdminService extends IService<Admin> {
 	Integer updatePass(AdminVO adminVO);
 
     List<Admin> listAll(String keywords);
+
+
 }

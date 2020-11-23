@@ -32,4 +32,5 @@ public interface AdminMapper extends BaseMapper<Admin> {
 	int updatepass(Integer adminId, String encode);
 
 	List<Admin> listAll(String keywords);
+
 }

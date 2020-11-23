@@ -1,10 +1,12 @@
 package com.xxxx.server.pojo;
 
-public class AdminVO {
+public class AdminVO extends Admin{
+
     private Integer adminId;
     private String checkPass;
     private String oldPass;
     private String pass;
+
 
     public Integer getAdminId() {
         return adminId;

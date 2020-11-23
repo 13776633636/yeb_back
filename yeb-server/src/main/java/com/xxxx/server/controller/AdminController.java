@@ -8,6 +8,8 @@ import com.xxxx.server.pojo.Role;
 import com.xxxx.server.service.IAdminRoleService;
 import com.xxxx.server.service.IAdminService;
 import com.xxxx.server.service.IRoleService;
+import com.xxxx.server.utils.AdminUtils;
+import com.xxxx.server.utils.AssertUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,6 +33,17 @@ public class AdminController {
     @Autowired
     private IAdminRoleService adminRoleService;
 
+
+    @PutMapping("/admin")
+    public RespBean forbid(@RequestBody Admin admin){
+        Admin currentAdmin = AdminUtils.getCurrentAdmin();
+        AssertUtil.isTrue(currentAdmin.getId()==admin.getId(),"不能禁用自己哦",401);
+        if (adminService.updateById(admin)){
+            return RespBean.success("");
+        }
+
+        return RespBean.error("修改失败");
+    }
 
     @GetMapping("/admin")
     public List<Admin> list(String keywords){
