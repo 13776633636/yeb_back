@@ -36,8 +36,8 @@ public class DepartmentController {
     public RespBean addDepartment(@RequestBody Department department) {
         AssertUtil.isTrue(StringUtils.isBlank(department.getName()),"部门名字为空",401);
         Integer parentId = department.getParentId();
-        Integer isParent = departmentService.queryById(parentId.toString());
-        if (isParent == 0){
+        Department parentDepartment = departmentService.queryById(parentId.toString());//查出父亲
+        if (parentDepartment.getParent() == false){//如父亲的isparent为false ,则需要改为true
             departmentService.updateIsParent(parentId);
         }
         //AssertUtil.isTrue();
@@ -49,11 +49,23 @@ public class DepartmentController {
     }
     @DeleteMapping("/{id}")
     public RespBean deleteDepartment(@PathVariable("id") String id){
-        Integer isParent = departmentService.queryById(id);
-       AssertUtil.isTrue(isParent ==1 ,"部门下有子部门，不能删除",401);
+
+        Department department = departmentService.queryById(id);//需要删除的对象
+        //查出它的父亲
+        Department parentDepartment = departmentService.queryById(department.getParentId().toString());
+
+        AssertUtil.isTrue(department.getParent() ,"部门下有子部门，不能删除",401);
 
         if (departmentService.removeById(id)){
+            //查出parentId集合
+            List<Integer> list = departmentService.queryParentIdList();
+            boolean contains = list.contains(parentDepartment.getId());
+            if(contains == false){//没有子了
+                //把isparent改为false
+                departmentService.updateIsParentByid(parentDepartment.getId());
+            }
             return RespBean.success("删除成功");
+
         }
         return RespBean.success("删除失败!");
     }

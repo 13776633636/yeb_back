@@ -136,6 +136,8 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee> i
         if (row>0){
             //String email = employee.getEmail();
             Employee newEmp = employeeMapper.selectEmployeeById(employee.getId());
+
+            //加入到队列
             rabbitTemplate.convertAndSend(MailConstants.MAIL_EXCHANGE_NAME,MailConstants.MAIL_ROUTING_KEY_NAME,newEmp,new CorrelationData(UUID.randomUUID().toString()));
             return true;
         }

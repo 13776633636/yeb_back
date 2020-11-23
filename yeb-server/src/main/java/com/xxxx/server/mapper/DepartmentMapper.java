@@ -15,7 +15,12 @@ import java.util.List;
 public interface DepartmentMapper extends BaseMapper<Department> {
     List<Department> listAll();
 
-    Integer queryById(String id);
+    Department queryById(String id);
 
     void updateIsParent(Integer parentId);
+
+
+    List<Integer> queryParentIdList();
+
+    void updateIsParentByid(Integer id);
 }

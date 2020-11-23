@@ -35,11 +35,10 @@
         from t_department
     </select>
 
-    <select id="queryById" parameterType="String" resultType="Integer">
-        select t_department.isParent
+    <select id="queryById" parameterType="String" resultType="com.xxxx.server.pojo.Department">
+        select *
         from t_department
         where t_department.id=#{id}
-
     </select>
 
     <update id="updateIsParent" parameterType="Integer">
@@ -49,6 +48,17 @@
 
     </update>
 
+    <select id="queryParentIdList" resultType="Integer">
+        select parentId
+        from t_department
 
+    </select>
+
+    <update id="updateIsParentByid">
+        update t_department
+        set isParent = 0
+        where id = #{id}
+
+    </update>
 
 </mapper>

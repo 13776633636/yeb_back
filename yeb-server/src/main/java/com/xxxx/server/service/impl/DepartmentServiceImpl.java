@@ -55,13 +55,25 @@ public class DepartmentServiceImpl extends ServiceImpl<DepartmentMapper, Departm
     }
 
     @Override
-    public Integer queryById(String id) {
-        Integer isParent = departmentMapper.queryById(id);
+    public Department queryById(String id) {
+        Department isParent = departmentMapper.queryById(id);
         return isParent;
     }
 
     @Override
     public void updateIsParent(Integer parentId) {
         departmentMapper.updateIsParent(parentId);
+    }
+
+    @Override
+    public List<Integer> queryParentIdList() {
+
+        List<Integer> list = departmentMapper.queryParentIdList();
+        return list;
+    }
+
+    @Override
+    public void updateIsParentByid(Integer id) {
+        departmentMapper.updateIsParentByid(id);
     }
 }
