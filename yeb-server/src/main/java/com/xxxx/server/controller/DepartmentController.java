@@ -55,7 +55,7 @@ public class DepartmentController {
         if (departmentService.removeById(id)){
             return RespBean.success("删除成功");
         }
-        return RespBean.success("删除失败");
+        return RespBean.success("删除失败!");
     }
 
 }
