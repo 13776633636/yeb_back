@@ -46,14 +46,14 @@ public class MailReceiver {
 	@RabbitListener(queues = MailConstants.MAIL_QUEUE_NAME)
 	public void handler(Message message, Channel channel) {
 		Employee employee = (Employee) message.getPayload();
-		System.out.println(message);
-		System.out.println(employee);
+		//System.out.println(message);
+		//System.out.println(employee);
 		MessageHeaders headers = message.getHeaders();
-		System.out.println(headers);
+		//System.out.println(headers);
 
 		//消息序号
 		long tag = (long) headers.get(AmqpHeaders.DELIVERY_TAG);
-		System.out.println(tag);
+		//System.out.println(tag);
 		String msgId = (String) headers.get("spring_returned_message_correlation");
 		HashOperations hashOperations = redisTemplate.opsForHash();
 		try {
@@ -103,7 +103,6 @@ public class MailReceiver {
 			 */
 			try {
 				channel.basicNack(tag,false,true);//告诉服务器这个消息我拒绝接收，basicNack可以一次性拒绝多个消息。
-
 			} catch (IOException ex) {
 				LOGGER.error("邮件发送失败=========>{}", e.getMessage());
 			}
